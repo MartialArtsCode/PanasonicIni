@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>3-Tier Login System</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #0a0f24;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .login-box {
+        background: #1c2340;
+        padding: 30px;
+        border-radius: 12px;
+        width: 320px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    input, select, button {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        font-size: 16px;
+        border-radius: 6px;
+        border: none;
+    }
+
+    button {
+        background: #2a7bff;
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #1a5ed1;
+    }
+
+    .dashboard {
+        display: none;
+    }
+
+    .role-box {
+        margin-top: 20px;
+        padding: 20px;
+        background: #152037;
+        border-radius: 10px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<div class="login-box" id="loginBox">
+    <h2>Login</h2>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <select id="role">
+        <option value="operator">Operator</option>
+        <option value="technician">Technician</option>
+        <option value="admin">Admin</option>
+    </select>
+
+    <button onclick="login()">Login</button>
+</div>
+
+<div class="dashboard" id="dashboard">
+    <h2 id="welcomeText"></h2>
+
+    <div class="role-box" id="operatorPanel">
+        <h3>Operator Panel</h3>
+        <p>• View approved robot programs</p>
+        <p>• Run production tasks</p>
+    </div>
+
+    <div class="role-box" id="technicianPanel">
+        <h3>Technician Panel</h3>
+        <p>• Edit welding parameters</p>
+        <p>• Upload updated robot programs</p>
+    </div>
+
+    <div class="role-box" id="adminPanel">
+        <h3>Admin Panel</h3>
+        <p>• Full access to system</p>
+        <p>• Manage users & permissions</p>
+    </div>
+
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+function login() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+    let role = document.getElementById("role").value;
+
+    // ★ In production, replace this with database authentication
+    if (user === "" || pass === "") {
+        alert("Please enter username and password.");
+        return;
+    }
+
+    // Hide login box, show dashboard
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+
+    // Display welcome message
+    document.getElementById("welcomeText").innerText =
+        "Welcome, " + user + " (" + role.toUpperCase() + ")";
+
+    // Hide all panels first
+    document.getElementById("operatorPanel").style.display = "none";
+    document.getElementById("technicianPanel").style.display = "none";
+    document.getElementById("adminPanel").style.display = "none";
+
+    // Show correct panels based on role
+    if (role === "operator") {
+        document.getElementById("operatorPanel").style.display = "block";
+    }
+    if (role === "technician") {
+        document.getElementById("technicianPanel").style.display = "block";
+    }
+    if (role === "admin") {
+        document.getElementById("adminPanel").style.display = "block";
+        document.getElementById("technicianPanel").style.display = "block";
+        document.getElementById("operatorPanel").style.display = "block";
+    }
+}
+
+function logout() {
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("loginBox").style.display = "block";
+}
+</script>
+
+</body>
+</html>
