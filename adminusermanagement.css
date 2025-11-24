@@ -1,0 +1,153 @@
+.adminPanel {
+  background: #1c2340;
+  padding: 32px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px #0004;
+  margin-top: 30px;
+  color: #fff;
+}
+.adminPanel h3 {
+  color: #7ecfff;
+  margin-bottom: 14px;
+  text-align: left;
+}
+.addUserBtn {
+  background: linear-gradient(90deg,#3c84fa,#61e6b6);
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 17px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #0003;
+  transition: background .18s;
+}
+.addUserBtn:hover {
+  background: linear-gradient(90deg,#2a7bff,#0ad4b8);
+}
+.loader {
+  color: #7ecfff;
+  margin-bottom: 14px;
+}
+.userTable {
+  width: 100%;
+  background: #161c2d;
+  border-radius: 8px;
+  box-shadow: 0 0 14px #0002;
+  border-collapse: separate;
+  margin-top: 12px;
+}
+.userTable th, .userTable td {
+  padding: 12px 6px;
+  text-align: center;
+}
+.userTable th {
+  background: #253168;
+  color: #aee7fd;
+  font-size: 16px;
+  letter-spacing: .05em;
+}
+.userTable tr:nth-child(even) td {
+  background: #1a2346;
+}
+.userTable button {
+  border: none;
+  border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 15px;
+  margin: 2px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background .18s;
+}
+.userTable button[disabled] {
+  background: #33384b !important;
+  color: #b0b0b0 !important;
+  cursor: not-allowed;
+}
+.editBtn { background: linear-gradient(90deg,#37b9a2,#61e6b6); color:#003;}
+.editBtn:hover { background: linear-gradient(90deg,#2a7bff,#0ad4b8);}
+.deleteBtn { background: linear-gradient(90deg,#d15e1a,#ff5332); color:#fff;}
+.deleteBtn:hover { background: linear-gradient(90deg,#b5420c,#ff2929);}
+.userTable select {
+  background: #191e34;
+  color: #d6f4fb;
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  padding: 6px;
+  margin-top:2px;
+}
+.modalBackdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(20,30,60,0.82);
+  z-index: 1000;
+}
+.modalWindow {
+  background: linear-gradient(120deg,#222e4d,#3c497e 70%);
+  padding: 30px 30px 20px;
+  border-radius: 15px;
+  min-width: 320px;
+  max-width: 92vw;
+  box-shadow: 0 4px 40px #024;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.modalWindow h2 {
+  margin-bottom: 16px;
+  font-weight: bold;
+  color: #7ecfff;
+  text-align: center;
+}
+.modalInput {
+  width: 100%;
+  padding: 12px 9px;
+  margin-bottom: 13px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background: #171e32;
+  color: #aee7fd;
+}
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+.modalBtn {
+  min-width: 46%;
+  padding: 10px 2px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 7px;
+  border: none;
+  box-shadow: 0 1px 8px #0005;
+  cursor: pointer;
+}
+.saveBtn {
+  background: linear-gradient(90deg,#2a7bff,#61e6b6);
+  color: #fff;
+}
+.saveBtn:hover {
+  background: linear-gradient(90deg,#1a5ed1,#37b9a2);
+}
+.cancelBtn {
+  background: #614a8e;
+  color: #fff;
+}
+.cancelBtn:hover {
+  background: #513a7e;
+}
+@media (max-width:480px) {
+  .modalWindow { min-width: unset; max-width: 98vw; }
+  .adminPanel { padding: 9vw 2vw; }
+}
