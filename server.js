@@ -10,7 +10,6 @@ const PORT = 3000;
 const USERS_FILE = path.join(__dirname, 'users.json');
 const SESSIONS_FILE = path.join(__dirname, 'sessions.json');
 
-// User and session helpers
 function loadUsers() {
     if (!fs.existsSync(USERS_FILE)) {
         const defaultUsers = [
@@ -57,7 +56,6 @@ function genToken() {
 app.use(cors());
 app.use(bodyParser.json());
 
-// Login: returns a persistent token if successful
 app.post('/api/login', (req, res) => {
     const { username, password, role } = req.body;
     const users = loadUsers();
@@ -69,16 +67,11 @@ app.post('/api/login', (req, res) => {
     if (!user) {
         return res.status(401).json({ error: 'Invalid credentials.' });
     }
-    // Check if user has a valid token already
     for (let token in sessions) {
         if (sessions[token].username === username && sessions[token].role === role) {
-            return res.json({
-                message: 'Login successful.',
-                username, role, token
-            });
+            return res.json({ message: 'Login successful.', username, role, token });
         }
     }
-    // Else create new token
     const token = genToken();
     sessions[token] = { username, role };
     saveSessions(sessions);
@@ -88,7 +81,6 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-// Middleware: Persistent admin session
 function requireAdmin(req, res, next) {
     const token = req.headers['authorization'];
     const sessions = loadSessions();
@@ -99,13 +91,11 @@ function requireAdmin(req, res, next) {
     next();
 }
 
-// List users [admin only]
 app.get('/api/users', requireAdmin, (req, res) => {
     const users = loadUsers();
     res.json(users);
 });
 
-// Add new user [admin only]
 app.post('/api/users', requireAdmin, (req, res) => {
     const users = loadUsers();
     const { username, password, role } = req.body;
@@ -120,7 +110,6 @@ app.post('/api/users', requireAdmin, (req, res) => {
     res.json({ message: 'User added.', users });
 });
 
-// Update user [admin only]
 app.put('/api/users/:username', requireAdmin, (req, res) => {
     const users = loadUsers();
     const { username } = req.params;
@@ -135,7 +124,6 @@ app.put('/api/users/:username', requireAdmin, (req, res) => {
     res.json({ message: 'User updated.', user });
 });
 
-// Delete user [admin only]
 app.delete('/api/users/:username', requireAdmin, (req, res) => {
     let users = loadUsers();
     const { username } = req.params;
@@ -148,7 +136,6 @@ app.delete('/api/users/:username', requireAdmin, (req, res) => {
     res.json({ message: 'User deleted.', users });
 });
 
-// Persistent logout: remove session from disk
 app.post('/api/logout', (req, res) => {
     const token = req.headers['authorization'];
     let sessions = loadSessions();
